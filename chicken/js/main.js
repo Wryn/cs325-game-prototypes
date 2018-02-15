@@ -97,7 +97,10 @@ function update() {
         gameOver = true;
     }
 
-    if(game.time.now >= 30000) gameOver = true;
+    if(game.time.now >= 30000){
+        score = 0;
+        gameOver = true;
+    }
 
 
 
