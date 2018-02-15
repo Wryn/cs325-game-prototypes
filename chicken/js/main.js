@@ -75,7 +75,7 @@ function update() {
     if(!gameOver){
         percentThere = ( 1 - (((goal.x - 15) - (player.x + 15)) / (goalPosition - 60)));
         score += Math.round(percentThere * player.body.velocity.x / 10 * 63110 / (goalPosition - 30)); //Calculates score based on relative distance to goal
-        if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && player.body.velocity.x < 4000){  //Caps the speed at 4000
+        if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && player.body.velocity.x < 3000){  //Caps the speed at 3000
             player.body.velocity.x += 10;
         }
 
