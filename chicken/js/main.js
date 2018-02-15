@@ -10,6 +10,7 @@ var bmd;
 
 function preload() {
     game.load.image('player', "assets/player.png");
+    game.load.image('stars', "assets/stars.png");
     game.load.physics('pData', "assets/player.json");
     game.load.audio('crash', "assets/crash.mp3")
     
@@ -23,16 +24,19 @@ function create() {
     thrust = 100;
     percentThere = 0;
     gameOver = false;
-    goalPosition = 31600 + Math.round(Math.random() * 31570)
+    goalPosition = 31600 + Math.round(Math.random() * 31570);
     game.stage.backgroundColor = '#000000';
-    score_display = game.add.text(20, 90, "Score: " + score);
+    score_display = game.add.text(20, 90, "Score: " + score); //Sets up Score display
     score_display.fixedToCamera = true;
     score_display.addColor("#FFFFFF", 0);
     score_display.kill();
-    speed_display = game.add.text(20, 90, "Speed: 0");
+    speed_display = game.add.text(20, 90, "Speed: 0"); //Sets up Speed display
     speed_display.fixedToCamera = true;
     speed_display.addColor("#FFFFFF", 0);
-    percent_display = game.add.text(540, 90, percentThere + "%");
+    time_display = game.add.text(20, 150, Number(game.time.now/1000).toFixed(2) + "s");
+    time_display.addColor("#FFFFFF", 0);
+    time_display.fixedToCamera = true;
+    percent_display = game.add.text(540, 90, percentThere + "%"); //Sets up progress display
     percent_display.anchor.setTo(0.5, 0.5);
     percent_display.fixedToCamera = true;
     percent_display.addColor("#FFFFFF", 0);
@@ -73,6 +77,7 @@ function update() {
 
 
     if(!gameOver){
+        time_display.setText(Number(game.time.now/1000).toFixed(2) + "s")
         percentThere = ( 1 - (((goal.x - 15) - (player.x + 15)) / (goalPosition - 60)));
         score += Math.round(percentThere * player.body.velocity.x / 10 * 63110 / (goalPosition - 30)); //Calculates score based on relative distance to goal
         if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && player.body.velocity.x < 3000){  //Caps the speed at 3000
@@ -92,7 +97,7 @@ function update() {
         gameOver = true;
     }
 
-    if(game.time.now === 30000) gameOver = true;
+    if(game.time.now >= 30000) gameOver = true;
 
 
 
