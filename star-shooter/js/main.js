@@ -11,7 +11,7 @@ var bullet;
 
 
 function preload() {
-    game.load.image('bullet', "assets/bullet.png");
+	game.load.image('bullet', "assets/bullet.png");
     game.load.image('player', "assets/player.png");
     game.load.image('star', "assets/star.png");
     game.load.physics('pData', "assets/player.json");
@@ -80,8 +80,8 @@ function update() {
 		if ((Math.PI / 2) + playerAngle > 0 && (Math.PI / 2) + playerAngle < Math.PI)
 		player.body.rotation = (Math.PI / 2) + playerAngle;
 		accelerateToObject(star, player, 100);
-		if (Math.abs(game.input.mousePointer.x - star.x) < lightRad && Math.abs(game.input.mousePointer.y - star.y) < lightRad) star.visible = true;
-		else if (Math.abs(player.x - star.x) < 50 && Math.abs(player.y - star.y) < 50) star.visible = true;
+		if (distance(star, game.input.mousePointer, this) < lightRad) star.visible = true;
+		else if (distance(star, player, this) < lightRad) star.visible = true;
 		else star.visible = false;
 
 		if(game.input.activePointer.leftButton.isDown && !bulletActive){
@@ -126,6 +126,10 @@ function accelerateToObject(obj1, obj2, speed) {
 }
 
 // End adapted code
+
+function distance(obj1, obj2) {
+    return (Math.pow(Math.pow((obj1.x - obj2.x), 2) + Math.pow((obj1.y - obj2.y), 2), 0.5));
+}
 
 function crash() {
 	player.kill();
