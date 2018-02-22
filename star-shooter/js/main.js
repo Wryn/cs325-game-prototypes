@@ -11,7 +11,7 @@ var bullet;
 
 
 function preload() {
-	game.load.image('bullet', "assets/bullet.png");
+    game.load.image('bullet', "assets/bullet.png");
     game.load.image('player', "assets/player.png");
     game.load.image('star', "assets/star.png");
     game.load.physics('pData', "assets/player.json");
