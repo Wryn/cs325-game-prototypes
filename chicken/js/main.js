@@ -10,7 +10,7 @@ var bmd;
 
 function preload() {
     game.load.image('player', "assets/player.png");
-    game.load.image('stars', "assets/stars.png");
+    game.load.image('bullet', "assets/bullet.png");
     game.load.physics('pData', "assets/player.json");
     game.load.audio('crash', "assets/crash.mp3")
     
@@ -19,12 +19,12 @@ function preload() {
 function create() {
 
     game.physics.startSystem(Phaser.Physics.P2JS);
-    game.world.setBounds(0, 0, 63200, 720);
+    game.world.setBounds(0, 0, 31600, 720);
     score = 0;
     thrust = 100;
     percentThere = 0;
     gameOver = false;
-    goalPosition = 31600 + Math.round(Math.random() * 31570);
+    goalPosition = 31570;//15800 + Math.round(Math.random() * 15770);
     game.stage.backgroundColor = '#000000';
     score_display = game.add.text(20, 90, "Score: " + score); //Sets up Score display
     score_display.fixedToCamera = true;
@@ -79,9 +79,11 @@ function update() {
     if(!gameOver){
         time_display.setText(Number(game.time.now/1000).toFixed(2) + "s")
         percentThere = ( 1 - (((goal.x - 15) - (player.x + 15)) / (goalPosition - 60)));
-        score += Math.round(percentThere * player.body.velocity.x / 10 * 63110 / (goalPosition - 30)); //Calculates score based on relative distance to goal
-        if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && player.body.velocity.x < 3000){  //Caps the speed at 3000
+        score += Math.round(percentThere * player.body.velocity.x / 10 * 31510 / (goalPosition - 30)); //Calculates score based on relative distance to goal
+        if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && player.body.velocity.x < 2000){  //Caps the speed at 3000
             player.body.velocity.x += 10;
+            trail = game.add.sprite(player.x - 20, player.y, 'bullet');
+            trail.anchor.set(0.5, 0.5);
         }
 
     }
@@ -97,7 +99,7 @@ function update() {
         gameOver = true;
     }
 
-    if(game.time.now >= 30000 && !gameOver){
+    if(game.time.now >= 20000 && !gameOver){
         score = 0;
         gameOver = true;
     }
