@@ -19,12 +19,12 @@ function preload() {
 function create() {
 
     game.physics.startSystem(Phaser.Physics.P2JS); 
-    game.world.setBounds(0, 0, 31600, 720);
+    game.world.setBounds(0, 0, 63200, 720);
     score = 0;
     thrust = 100;
     percentThere = 0;
     gameOver = false;
-    goalPosition = 15800 + Math.round(Math.random() * 15770);
+    goalPosition = 31600 + Math.round(Math.random() * 31570);
     game.stage.backgroundColor = '#000000';
     score_display = game.add.text(20, 90, "Score: " + score); //Sets up Score display
     score_display.fixedToCamera = true;
@@ -55,12 +55,6 @@ function create() {
     goal.body.rotation = (3 * Math.PI / 2)
     goal.body.clearShapes();
     goal.body.loadPolygon('pData', "player");
-    for (var x = 0; x < 31600; x += 200){
-        trail = game.add.sprite(x, player.y, 'bullet');
-        trail.anchor.set(0.5, 0.5);
-        trail.tint = parseInt(rgbToHexString(Math.round(Math.random() * 255), Math.round(Math.random() * 255), Math.round(Math.random() * 255)), 16)
-    }
-    game.world.bringToTop(player);
     game.camera.follow(player);
 
 
@@ -82,8 +76,8 @@ function update() {
     if(!gameOver){
         time_display.setText(Number(game.time.now/1000).toFixed(2) + "s")
         percentThere = ( 1 - (((goal.x - 15) - (player.x + 15)) / (goalPosition - 60)));
-        score += Math.round(percentThere * player.body.velocity.x / 10 * 31510 / (goalPosition - 30)); //Calculates score based on relative distance to goal
-        if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && player.body.velocity.x < 2000){  //Caps the speed at 3000
+        score += Math.round(percentThere * player.body.velocity.x / 10 * 63110 / (goalPosition - 30)); //Calculates score based on relative distance to goal
+        if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && player.body.velocity.x < 3000){  //Caps the speed at 3000
             player.body.velocity.x += 10;
         }
 
@@ -100,21 +94,11 @@ function update() {
         gameOver = true;
     }
 
-    if(game.time.now >= 20000 && !gameOver){
+    if(game.time.now >= 30000 && !gameOver){
         score = 0;
         gameOver = true;
     }
 
 
 
-}
-
-function componentToHexString(component){
-    hex = component.toString(16);
-    if (hex.length == 1) {return "0" + hex};
-    return hex;
-}
-
-function rgbToHexString(r, g, b){
-    return "0x" + componentToHexString(r) + componentToHexString(g) + componentToHexString(b);
 }
