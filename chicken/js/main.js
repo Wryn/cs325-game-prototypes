@@ -24,7 +24,7 @@ function create() {
     thrust = 100;
     percentThere = 0;
     gameOver = false;
-    goalPosition = 31570;//15800 + Math.round(Math.random() * 15770);
+    goalPosition = 15800 + Math.round(Math.random() * 15770);
     game.stage.backgroundColor = '#000000';
     score_display = game.add.text(20, 90, "Score: " + score); //Sets up Score display
     score_display.fixedToCamera = true;
