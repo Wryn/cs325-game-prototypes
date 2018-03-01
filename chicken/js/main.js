@@ -55,10 +55,13 @@ function create() {
     goal.body.rotation = (3 * Math.PI / 2)
     goal.body.clearShapes();
     goal.body.loadPolygon('pData', "player");
+    for (var x = 0; x < 31600; x += 200){
+        trail = game.add.sprite(x, player.y, 'bullet');
+        trail.anchor.set(0.5, 0.5);
+        trail.tint = parseInt(rgbToHexString(Math.round(Math.random() * 255), Math.round(Math.random() * 255), Math.round(Math.random() * 255)), 16)
+    }
+    game.world.bringToTop(player);
     game.camera.follow(player);
-
-
-
 
 
 }
@@ -82,8 +85,6 @@ function update() {
         score += Math.round(percentThere * player.body.velocity.x / 10 * 31510 / (goalPosition - 30)); //Calculates score based on relative distance to goal
         if(game.input.keyboard.isDown(Phaser.Keyboard.SHIFT) && player.body.velocity.x < 2000){  //Caps the speed at 3000
             player.body.velocity.x += 10;
-            trail = game.add.sprite(player.x - 20, player.y, 'bullet');
-            trail.anchor.set(0.5, 0.5);
         }
 
     }
@@ -106,4 +107,14 @@ function update() {
 
 
 
+}
+
+function componentToHexString(component){
+    hex = component.toString(16);
+    if (hex.length == 1) {return "0" + hex};
+    return hex;
+}
+
+function rgbToHexString(r, g, b){
+    return "0x" + componentToHexString(r) + componentToHexString(g) + componentToHexString(b);
 }
