@@ -18,7 +18,7 @@ function preload() {
 
 function create() {
 
-    game.physics.startSystem(Phaser.Physics.P2JS);
+    game.physics.startSystem(Phaser.Physics.P2JS); 
     game.world.setBounds(0, 0, 31600, 720);
     score = 0;
     thrust = 100;
