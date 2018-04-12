@@ -69,14 +69,17 @@ function create() {
 	select_1 = game.add.sprite(270, 480, 'select');
 	select_1.anchor.setTo(0.5, 0.5);
 	select_1.inputEnabled = true;
+	select_1.events.onInputDown.add(reset1, this);
 
 	select_2 = game.add.sprite(540, 480, 'select');
 	select_2.anchor.setTo(0.5, 0.5);
 	select_2.inputEnabled = true;
+	select_2.events.onInputDown.add(reset2, this);
 
 	select_3 = game.add.sprite(810, 480, 'select');
 	select_3.anchor.setTo(0.5, 0.5);
 	select_3.inputEnabled = true;
+	select_3.events.onInputDown.add(reset3, this);
 
 	p1_health = 10;
 	p1_health_display = game.add.text(20, 60, "P1 Health: " + p1_health);
@@ -147,6 +150,7 @@ function update() {
 			num_blocks.setText("Blocks: " + p1_count[3]);
 			num_dodges.setText("Dodges: " + p1_count[4]);
 			selected = p1_selected;
+			while(p1_selected[p1_select] != 0) p1_select = (p1_select + 1) % 3;
 
 		}
 
@@ -158,6 +162,7 @@ function update() {
 			num_blocks.setText("Blocks: " + p2_count[3]);
 			num_dodges.setText("Dodges: " + p2_count[4]);
 			selected = p2_selected;
+			while(p2_selected[p2_select] != 0) p2_select = (p2_select + 1) % 3;
 
 		}
 
@@ -301,7 +306,6 @@ function sword() {
 		if(p1_count[0] > 0){
 			p1_selected[p1_select] = 1;
 			if(p1_select == 2) endTurn();
-			p1_select = (p1_select + 1) % 3;
 			p1_count[0]--;
 		}
 
@@ -311,7 +315,6 @@ function sword() {
 		if(p2_count[0] > 0){
 			p2_selected[p2_select] = 1;
 			if(p2_select == 2) endTurn();
-			p2_select = (p2_select + 1) % 3;
 			p2_count[0]--;
 		}
 
@@ -326,7 +329,6 @@ function axe() {
 		if(p1_count[1] > 0){
 			p1_selected[p1_select] = 2;
 			if(p1_select == 2) endTurn();
-			p1_select = (p1_select + 1) % 3;
 			p1_count[1]--;
 		}
 
@@ -336,7 +338,6 @@ function axe() {
 		if(p2_count[1] > 0){
 			p2_selected[p2_select] = 2;
 			if(p2_select == 2) endTurn();
-			p2_select = (p2_select + 1) % 3;
 			p2_count[1]--;
 		}
 
@@ -361,7 +362,6 @@ function bow() {
 		if(p2_count[2] > 0){
 			p2_selected[p2_select] = 3;
 			if(p2_select == 2) endTurn();
-			p2_select = (p2_select + 1) % 3;
 			p2_count[2]--;
 		}
 
@@ -376,7 +376,6 @@ function block() {
 		if(p1_count[3] > 0){
 			p1_selected[p1_select] = 4;
 			if(p1_select == 2) endTurn();
-			p1_select = (p1_select + 1) % 3;
 			p1_count[3]--;
 		}
 
@@ -386,7 +385,6 @@ function block() {
 		if(p2_count[3] > 0){
 			p2_selected[p2_select] = 4;
 			if(p2_select == 2) endTurn();
-			p2_select = (p2_select + 1) % 3;
 			p2_count[3]--;
 		}
 
@@ -401,7 +399,6 @@ function dodge() {
 		if(p1_count[4] > 0){
 			p1_selected[p1_select] = 5;
 			if(p1_select == 2) endTurn();
-			p1_select = (p1_select + 1) % 3;
 			p1_count[4]--;
 		}
 
@@ -411,9 +408,129 @@ function dodge() {
 		if(p2_count[4] > 0){
 			p2_selected[p2_select] = 5;
 			if(p2_select == 2) endTurn();
-			p2_select = (p2_select + 1) % 3;
 			p2_count[4]--;
 		}
+
+	}
+
+}
+
+function reset1(){
+
+	if (turn == 1){
+
+		switch(p1_selected[0]){
+
+			case 1: p1_count[0]++; break;
+			case 2: p1_count[1]++; break;
+			case 3: p1_count[2]++; break;
+			case 4: p1_count[3]++; break;
+			case 5: p1_count[4]++; break;
+			default: return;
+
+		}
+
+		p1_selected[0] = 0;
+		p1_select = 0;
+
+
+	}
+
+	else if (turn == 2){
+
+		switch(p2_selected[0]){
+
+			case 1: p2_count[0]++; break;
+			case 2: p2_count[1]++; break;
+			case 3: p2_count[2]++; break;
+			case 4: p2_count[3]++; break;
+			case 5: p2_count[4]++; break;
+			default: return;
+
+		}
+
+		p2_selected[0] = 0;
+		p2_select = 0;
+
+	}
+
+}
+
+function reset2(){
+	
+	if (turn == 1){
+
+		switch(p1_selected[1]){
+
+			case 1: p1_count[0]++; break;
+			case 2: p1_count[1]++; break;
+			case 3: p1_count[2]++; break;
+			case 4: p1_count[3]++; break;
+			case 5: p1_count[4]++; break;
+			default: return;
+
+		}
+
+		p1_selected[1] = 0;
+		p1_select = 0;
+
+	}
+
+	else if (turn == 2){
+
+		switch(p2_selected[1]){
+
+			case 1: p2_count[0]++; break;
+			case 2: p2_count[1]++; break;
+			case 3: p2_count[2]++; break;
+			case 4: p2_count[3]++; break;
+			case 5: p2_count[4]++; break;
+			default: return;
+
+		}
+
+		p2_selected[1] = 0;
+		p2_select = 0;
+
+	}
+
+}
+
+function reset3(){
+	
+	if (turn == 1){
+
+		switch(p1_selected[2]){
+
+			case 1: p1_count[0]++; break;
+			case 2: p1_count[1]++; break;
+			case 3: p1_count[2]++; break;
+			case 4: p1_count[3]++; break;
+			case 5: p1_count[4]++; break;
+			default: return;
+
+		}
+
+		p1_selected[2] = 0;
+		p1_select = 0;
+
+	}
+
+	else if (turn == 2){
+
+		switch(p2_selected[2]){
+
+			case 1: p2_count[0]++; break;
+			case 2: p2_count[1]++; break;
+			case 3: p2_count[2]++; break;
+			case 4: p2_count[3]++; break;
+			case 5: p2_count[4]++; break;
+			default: return;
+
+		}
+
+		p2_selected[1] = 0;
+		p2_select = 0;
 
 	}
 
@@ -423,6 +540,8 @@ function clearSelect(){
 
 	p1_selected = [0, 0, 0];
 	p2_selected = [0, 0, 0];
+	p1_select = 0;
+	p2_select = 0;
 
 }
 
