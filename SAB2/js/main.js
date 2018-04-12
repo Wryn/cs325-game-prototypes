@@ -30,7 +30,7 @@ function create() {
 	sword_icon.anchor.setTo(0.5,0.5);
 	sword_icon.inputEnabled = true;
 	sword_icon.events.onInputDown.add(sword, this);
-	num_swords = game.add.text(540, 360, '');
+	num_swords = game.add.text(540, 330, '');
 	num_swords.addColor("#FFFFFF", 0);
 	num_swords.anchor.setTo(0.5,0.5);
 
@@ -38,7 +38,7 @@ function create() {
 	axe_icon.anchor.setTo(0.5,0.5);
 	axe_icon.inputEnabled = true;
 	axe_icon.events.onInputDown.add(axe, this);
-	num_axes = game.add.text(270, 360, '');
+	num_axes = game.add.text(270, 330, '');
 	num_axes.addColor("#FFFFFF", 0);
 	num_axes.anchor.setTo(0.5,0.5);
 
@@ -46,23 +46,23 @@ function create() {
 	bow_icon.anchor.setTo(0.5,0.5);
 	bow_icon.inputEnabled = true;
 	bow_icon.events.onInputDown.add(bow, this);
-	num_bows = game.add.text(810, 360, '');
+	num_bows = game.add.text(810, 330, '');
 	num_bows.addColor("#FFFFFF", 0);
 	num_bows.anchor.setTo(0.5,0.5);
 
-	block_icon = game.add.sprite(405, 360, 'block');
+	block_icon = game.add.sprite(405, 240, 'block');
 	block_icon.anchor.setTo(0.5, 0.5);
 	block_icon.inputEnabled = true;
 	block_icon.events.onInputDown.add(block, this);
-	num_blocks = game.add.text(405, 240, '');
+	num_blocks = game.add.text(405, 330, '');
 	num_blocks.addColor("#FFFFFF", 0);
 	num_blocks.anchor.setTo(0.5,0.5);
 
-	dodge_icon = game.add.sprite(675, 360, 'dodge');
+	dodge_icon = game.add.sprite(675, 240, 'dodge');
 	dodge_icon.anchor.setTo(0.5, 0.5);
 	dodge_icon.inputEnabled = true;
 	dodge_icon.events.onInputDown.add(dodge, this);
-	num_dodges = game.add.text(675, 240, '');
+	num_dodges = game.add.text(675, 330, '');
 	num_dodges.addColor("#FFFFFF", 0);
 	num_dodges.anchor.setTo(0.5,0.5);
 
@@ -144,11 +144,11 @@ function update() {
 			select_3.revive();
 			turn_display.revive();
 
-			num_swords.setText("Swords: " + p1_count[0]);
-			num_axes.setText("Axes: " + p1_count[1]);
-			num_bows.setText("Bows: " + p1_count[2]);
-			num_blocks.setText("Blocks: " + p1_count[3]);
-			num_dodges.setText("Dodges: " + p1_count[4]);
+			num_swords.setText(p1_count[0]);
+			num_axes.setText(p1_count[1]);
+			num_bows.setText(p1_count[2]);
+			num_blocks.setText(p1_count[3]);
+			num_dodges.setText(p1_count[4]);
 			selected = p1_selected;
 			while(p1_selected[p1_select] != 0) p1_select = (p1_select + 1) % 3;
 
@@ -156,11 +156,11 @@ function update() {
 
 		else if(turn == 2){
 
-			num_swords.setText("Swords: " + p2_count[0]);
-			num_axes.setText("Axes: " + p2_count[1]);
-			num_bows.setText("Bows: " + p2_count[2]);
-			num_blocks.setText("Blocks: " + p2_count[3]);
-			num_dodges.setText("Dodges: " + p2_count[4]);
+			num_swords.setText(p2_count[0]);
+			num_axes.setText(p2_count[1]);
+			num_bows.setText(p2_count[2]);
+			num_blocks.setText(p2_count[3]);
+			num_dodges.setText(p2_count[4]);
 			selected = p2_selected;
 			while(p2_selected[p2_select] != 0) p2_select = (p2_select + 1) % 3;
 
